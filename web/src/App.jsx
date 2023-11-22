@@ -9,6 +9,7 @@ function App() {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [id, setId] = useState('');
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -70,7 +71,7 @@ function App() {
     e.preventDefault();
     console.log(name,price, description, image);
 
-    const res = await fetch(`http://localhost:3000/api/products/${selected._id}`,{
+    const res = await fetch(`http://localhost:3000/api/products/${id}`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -112,10 +113,10 @@ function App() {
       <div className='w-[30%] border-2 border-green-600 rounded-md'>
         <h1 className="font-bold text-center">EDITAR UN PRODUCTO</h1>
         <form onSubmit={handleEdit} className="flex flex-col p-4 gap-4">
-          <input defaultValue={name} value={name} onChange={handleNameChange} name="name" className="border-2 border-blue-500 p-2 rounded-md" type="text" placeholder="name" />
-          <input defaultValue={price} value={price} onChange={handlePriceChange}  name="price" className="border-2 border-blue-500 p-2 rounded-md" type="number" placeholder="price" />
-          <input defaultValue={description} value={description} onChange={handleDescriptionChange} name="description" className="border-2 border-blue-500 p-2 rounded-md" type="text" placeholder="description" />
-          <input defaultValue={image} value={image} onChange={handleImageChange} name="image" className="border-2 border-blue-500 p-2 rounded-md" type="text" placeholder="image" />
+          <input  value={name} onChange={handleNameChange} name="name" className="border-2 border-blue-500 p-2 rounded-md" type="text" placeholder="name" />
+          <input value={price} onChange={handlePriceChange}  name="price" className="border-2 border-blue-500 p-2 rounded-md" type="number" placeholder="price" />
+          <input value={description} onChange={handleDescriptionChange} name="description" className="border-2 border-blue-500 p-2 rounded-md" type="text" placeholder="description" />
+          <input value={image} onChange={handleImageChange} name="image" className="border-2 border-blue-500 p-2 rounded-md" type="text" placeholder="image" />
 
           <button type='submit' className="border-2 p-2 bg-green-500 rounded-md">Editar</button>
         </form>
@@ -142,6 +143,7 @@ function App() {
                   setPrice(product.price);
                   setDescription(product.description);
                   setImage(product.image);
+                  setId(product._id);
                 }} className="border-2 text-white rounded-md p-2 bg-blue-500">Editar</button>
                 </div>
 
